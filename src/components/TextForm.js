@@ -10,18 +10,28 @@ export default function TextForm(props) {
 
   const handleUpClick = () => {
     // console.log("uppercase was click");
-    let newText = text.toUpperCase();
-    setText(newText);
+    if(text !== "") {
+      let newText = text.toUpperCase();
+      setText(newText);
 
-    props.showAlert("Text Converted to Uppercase","success");
+      props.showAlert("Text Converted to Uppercase","success");
+    }
+    else {
+      props.showAlert("Please enter something to Convert Uppercase","danger");
+    }
   }
 
   const handleLoClick = () => {
     // console.log("Lowercase was click");
-    let newText = text.toLowerCase();
-    setText(newText);
+    if(text !== "") {
+      let newText = text.toLowerCase();
+      setText(newText);
 
-    props.showAlert("Text Converted to Lowercase","success");
+      props.showAlert("Text Converted to Lowercase","success");
+    }
+    else {
+      props.showAlert("Please enter something to Convert Lowercase","danger");
+    }
   }
   
   const clearAll = () => {
@@ -45,7 +55,8 @@ export default function TextForm(props) {
       </div>
       <div className="container my-4" style={{backgroundColor:`${props.mode ==="light"?"white":"black"}`, color:`${props.mode ==="dark"?"white":"black"}`}}>
         <h2>Your Text summary</h2>
-        <p>{text.split(" ").length} Words and {text.length} Characters.</p>
+        <p>{text.split(/\s+/).filter((element)=> {return element.length !== 0}).length} Words and {text.length} Characters.</p>
+        {/* Regular expression : /\s+/  : white space including new line. */}
         <h2>Preview</h2>
         <p>{text}</p>
       </div>
